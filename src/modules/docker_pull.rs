@@ -24,13 +24,16 @@ impl Module for DockerPull {
         let mut rng = rng();
 
         let image = DOCKER_IMAGES_LIST.choose(&mut rng).unwrap_or(&"ubuntu");
-        let tag = ["latest", "nightly", "2.4.0", "1.15.0", "24.04", "22.04", "lts", "slim", "alpine", "bookworm"]
-            .choose(&mut rng)
-            .unwrap_or(&"latest");
+        let tag = [
+            "latest", "nightly", "2.4.0", "1.15.0", "24.04", "22.04", "lts", "slim", "alpine",
+            "bookworm",
+        ]
+        .choose(&mut rng)
+        .unwrap_or(&"latest");
 
         print(format!("Using default tag: {tag}")).await;
         newline().await;
-        print(format!("{image}:{tag}"),).await;
+        print(format!("{image}:{tag}")).await;
         newline().await;
 
         csleep(rng.random_range(300..1500)).await;
@@ -107,10 +110,7 @@ impl Module for DockerPull {
         let full_hash = gen_hex_string(&mut rng, 64);
         print(format!("Digest: sha256:{full_hash}")).await;
         newline().await;
-        print(format!(
-            "Status: Downloaded newer image for {image}:{tag}",
-        ))
-        .await;
+        print(format!("Status: Downloaded newer image for {image}:{tag}",)).await;
         newline().await;
         newline().await;
         print(format!(

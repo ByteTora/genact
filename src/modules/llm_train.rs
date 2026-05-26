@@ -29,21 +29,36 @@ impl Module for LlmTrain {
         let mut rng = rng();
 
         let model_names = [
-            "Llama-7B", "Llama-13B", "Llama-70B", "Mistral-7B",
-            "Mistral-8x7B", "Qwen2-72B", "DeepSeek-67B", "GPT-NeoX-20B",
-            "Falcon-40B", "Phi-3-mini", "Gemma-7B", "Yi-34B",
+            "Llama-7B",
+            "Llama-13B",
+            "Llama-70B",
+            "Mistral-7B",
+            "Mistral-8x7B",
+            "Qwen2-72B",
+            "DeepSeek-67B",
+            "GPT-NeoX-20B",
+            "Falcon-40B",
+            "Phi-3-mini",
+            "Gemma-7B",
+            "Yi-34B",
         ];
         let model = model_names.choose(&mut rng).unwrap_or(&"Llama-7B");
 
         dprint(
-            format!("{} Initializing distributed training on 8 GPUs...", Paint::cyan("INFO").bold()),
+            format!(
+                "{} Initializing distributed training on 8 GPUs...",
+                Paint::cyan("INFO").bold()
+            ),
             10,
         )
         .await;
         newline().await;
         csleep(rng.random_range(200..800)).await;
         dprint(
-            format!("{} Loading pretrained weights for {model}", Paint::cyan("INFO").bold()),
+            format!(
+                "{} Loading pretrained weights for {model}",
+                Paint::cyan("INFO").bold()
+            ),
             5,
         )
         .await;
@@ -66,7 +81,11 @@ impl Module for LlmTrain {
         let num_terms = rng.random_range(15..30);
         let terms: Vec<_> = LLM_TERMS_LIST.sample(&mut rng, num_terms).collect();
         dprint(
-            format!("{} Initializing {} parameter groups", Paint::cyan("INFO").bold(), terms.len()),
+            format!(
+                "{} Initializing {} parameter groups",
+                Paint::cyan("INFO").bold(),
+                terms.len()
+            ),
             5,
         )
         .await;
@@ -92,7 +111,10 @@ impl Module for LlmTrain {
             format!(
                 "{} Total trainable params: {}",
                 Paint::cyan("INFO").bold(),
-                humansize::format_size(rng.random_range(500_000_000..8_000_000_000u64), humansize::BINARY),
+                humansize::format_size(
+                    rng.random_range(500_000_000..8_000_000_000u64),
+                    humansize::BINARY
+                ),
             ),
             5,
         )
@@ -140,8 +162,12 @@ impl Module for LlmTrain {
                 loss = loss.max(0.01);
                 best_loss = best_loss.min(loss);
 
-                let lr = 3e-5 * (1.0 - ((epoch - 1) as f64 * steps_per_epoch as f64 + step as f64)
-                    / (total_epochs as f64 * steps_per_epoch as f64) * 0.9).max(0.1);
+                let lr = 3e-5
+                    * (1.0
+                        - ((epoch - 1) as f64 * steps_per_epoch as f64 + step as f64)
+                            / (total_epochs as f64 * steps_per_epoch as f64)
+                            * 0.9)
+                        .max(0.1);
 
                 let grad_norm = rng.random_range(0.05..3.5);
                 let gpu_used: f64 = 40.0 + rng.random_range(0.0..12.0) + (loss * 2.5).min(25.0);
@@ -184,7 +210,10 @@ impl Module for LlmTrain {
             newline().await;
 
             dprint(
-                format!("{} Saving checkpoint to ./checkpoints/epoch_{epoch}.pt", Paint::green("SAVE").bold()),
+                format!(
+                    "{} Saving checkpoint to ./checkpoints/epoch_{epoch}.pt",
+                    Paint::green("SAVE").bold()
+                ),
                 8,
             )
             .await;
@@ -229,13 +258,19 @@ impl Module for LlmTrain {
         .await;
         newline().await;
         dprint(
-            format!("{} Saving final model to ./output/{model}_final.pt", Paint::cyan("INFO").bold()),
+            format!(
+                "{} Saving final model to ./output/{model}_final.pt",
+                Paint::cyan("INFO").bold()
+            ),
             8,
         )
         .await;
         newline().await;
         dprint(
-            format!("{} Uploading to Hugging Face Hub: svenstaro/{model}", Paint::cyan("INFO").bold()),
+            format!(
+                "{} Uploading to Hugging Face Hub: svenstaro/{model}",
+                Paint::cyan("INFO").bold()
+            ),
             10,
         )
         .await;
