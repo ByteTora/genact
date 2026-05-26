@@ -73,7 +73,7 @@ impl Module for DockerPull {
                 let chunk = ((layer_size as f64 / 100.0) * connection_speed as f64 / 20.0) as u64;
                 let chunk = rng.random_range((chunk / 2).max(1)..(chunk * 2).max(2));
                 let chunk = chunk.min((layer_size as u64 - downloaded).max(1));
-                let chunk = chunk.max(1).min(10_000_000);
+                let chunk = chunk.clamp(1, 10_000_000);
                 downloaded = (downloaded + chunk).min(layer_size as u64);
                 let percent = (downloaded as f64 / layer_size as f64 * 100.0).min(100.0);
 
