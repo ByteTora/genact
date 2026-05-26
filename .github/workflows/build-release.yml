@@ -171,8 +171,8 @@ jobs:
         run: podman build --format docker --platform linux/arm/v7 --manifest genact -f Containerfile target/armv7-unknown-linux-musleabihf/release
 
       - name: podman manifest push latest
-        run: podman manifest push genact docker.io/svenstaro/genact:latest
+        run: podman manifest push genact docker.io/${{ github.repository_owner }}/genact:latest
 
       - name: podman manifest push tag version
-        run: podman manifest push genact docker.io/svenstaro/genact:${{ needs.publish.outputs.version }}
+        run: podman manifest push genact docker.io/${{ github.repository_owner }}/genact:${{ needs.publish.outputs.version }}
         if: startsWith(github.ref_name, 'v')

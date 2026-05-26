@@ -7,10 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 <!-- next-header -->
 
+## [1.6.0] - 2026-05-26
+- Add docker_pull module - simulates `docker pull` with layered download progress
+- Add llm_train module - simulates LLM/distributed training with loss curves and GPU stats
+- Switch default README to Chinese
+
 ## [Unreleased] - ReleaseDate
-- Fix getting stuck in rkhunter module [#704](https://github.com/svenstaro/genact/issues/704)
-- Add uv module [#710](https://github.com/svenstaro/genact/pull/710) (thanks @RektPunk)
-- Switch from async-std to tokio [#707](https://github.com/svenstaro/genact/pull/707)
 
 ## [1.5.1] - 2026-01-26
 - Add idle inhibition feature via `--inhibit` [#698](https://github.com/svenstaro/genact/pull/698) (thanks @cyqsimon)
@@ -86,7 +88,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Rewrite web version using wasm-bindgen
 
 <!-- next-url -->
-[Unreleased]: https://github.com/svenstaro/genact/compare/v1.5.1...HEAD
+[Unreleased]: https://github.com/ByteTora/genact/compare/v1.6.0...HEAD
+[1.6.0]: https://github.com/ByteTora/genact/compare/v1.5.1...v1.6.0
 [1.5.1]: https://github.com/svenstaro/genact/compare/v1.5.0...v1.5.1
 [1.5.0]: https://github.com/svenstaro/genact/compare/v1.4.2...v1.5.0
 [1.4.2]: https://github.com/svenstaro/genact/compare/v1.4.1...v1.4.2
