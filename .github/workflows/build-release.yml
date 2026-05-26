@@ -2,6 +2,9 @@ name: Build/publish release
 
 on: [push, pull_request]
 
+permissions:
+  contents: write
+
 jobs:
   publish:
     name: Binary ${{ matrix.target }} (on ${{ matrix.os }})
