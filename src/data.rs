@@ -22,6 +22,8 @@ static TERRAFORM_IDS: &str = include_str!("../data/terraform_ids.txt");
 static CSS_PROPERTIES: &str = include_str!("../data/css_properties.txt");
 static WEB_APIS: &str = include_str!("../data/web_apis.txt");
 static WPT_CATEGORIES: &str = include_str!("../data/wpt_categories.txt");
+static DOCKER_IMAGES: &str = include_str!("../data/docker_images.txt");
+static LLM_TERMS: &str = include_str!("../data/llm_terms.txt");
 
 pub static BOOTLOG_LIST: LazyLock<Vec<&'static str>> = LazyLock::new(|| BOOTLOG.lines().collect());
 pub static CFILES_LIST: LazyLock<Vec<&'static str>> = LazyLock::new(|| CFILES.lines().collect());
@@ -83,3 +85,9 @@ pub static EXTENSIONS_LIST: &[&str] = &[
 
 pub static COMPRESSION_FORMATS_LIST: &[&str] =
     &["gzip", "bzip2", "lzma", "xz", "lzop", "lz4", "zstd"];
+
+pub static DOCKER_IMAGES_LIST: LazyLock<Vec<&'static str>> =
+    LazyLock::new(|| DOCKER_IMAGES.lines().collect());
+
+pub static LLM_TERMS_LIST: LazyLock<Vec<&'static str>> =
+    LazyLock::new(|| LLM_TERMS.lines().collect());
